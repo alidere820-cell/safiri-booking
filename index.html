@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Savannah Haven | Luxury Safari Lodge Booking System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fefaf5;
+            color: #2c2418;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --primary: #b87c4e;
+            --primary-dark: #8b5a34;
+            --primary-light: #dbaa7a;
+            --secondary: #2c5f2d;
+            --accent: #e0a82b;
+            --cream: #fff9ef;
+            --gray-light: #f5ede3;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 35px -10px rgba(0,0,0,0.12);
+            --yellow-green: linear-gradient(135deg, #e9f5a0 0%, #c5e043 50%, #a8c92a 100%);
+            --yellow-green-dark: #9bbf2a;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(255, 253, 248, 0.98);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--yellow-green-dark) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c2418;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--yellow-green-dark);
+        }
+
+        .btn-primary {
+            background: var(--yellow-green);
+            color: #2c2418;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(165, 201, 42, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--yellow-green-dark);
+            color: var(--yellow-green-dark);
+            padding: 0.65rem 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--yellow-green);
+            color: #2c2418;
+            border-color: transparent;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--yellow-green-dark);
+            color: var(--yellow-green-dark);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--yellow-green);
+            color: #2c2418;
+            border-color: transparent;
+        }
+
+        /* HERO SECTION - YELLOW GREEN */
+        .hero {
+            background: linear-gradient(135deg, #e9f5a0 0%, #c5e043 40%, #a8c92a 100%);
+            padding: 5rem 5% 4rem;
+            text-align: center;
+            border-radius: 0 0 50px 50px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2c2418 0%, #4a6a1a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #2c4a1a;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .booking-widget {
+            background: white;
+            border-radius: 30px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 1100px;
+            margin: 2rem auto 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .field-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .field-group label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--yellow-green-dark);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .field-group input, .field-group select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #e2d5c8;
+            border-radius: 12px;
+            font-family: inherit;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #eedfcb;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .section-title i {
+            color: var(--yellow-green-dark);
+            font-size: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border: 1px solid #f0e2d4;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--yellow-green-dark);
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .badge {
+            background: var(--yellow-green);
+            color: #2c2418;
+            border-radius: 50px;
+            padding: 0.25rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .room-selector {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            border: 2px solid #f0e2d4;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .room-card.selected {
+            border-color: var(--yellow-green-dark);
+            background: #f9fce8;
+            box-shadow: var(--shadow-md);
+        }
+
+        .room-card i {
+            font-size: 2.5rem;
+            color: var(--yellow-green-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .room-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--yellow-green-dark);
+            margin: 0.5rem 0;
+        }
+
+        .availability {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .upsell-item {
+            background: var(--gray-light);
+            padding: 1rem;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .cart-preview {
+            background: linear-gradient(135deg, #f9fce8 0%, #f0f5d8 100%);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .agent-portal {
+            background: linear-gradient(135deg, var(--yellow-green-dark) 0%, #4a6a1a 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        .agent-portal input {
+            padding: 0.7rem;
+            border-radius: 10px;
+            border: none;
+            width: 200px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            background: var(--yellow-green-dark);
+            color: #2c2418;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .footer {
+            background: #2c2418;
+            color: #e6d5c2;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #e6d5c2;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">🦁 Savannah Haven</div>
+    <div class="nav-links">
+        <a onclick="scrollToSection('rooms')">Rooms</a>
+        <a onclick="scrollToSection('packages')">Packages</a>
+        <a onclick="scrollToSection('agent')">Agent Portal</a>
+        <a onclick="scrollToSection('dashboard')">Dashboard</a>
+        <button class="btn-secondary" onclick="openLoginModal()">Login</button>
+        <button class="btn-primary" onclick="openBookingModal()">Book Now</button>
+    </div>
+</nav>
+
+<!-- HERO SECTION - YELLOW GREEN (UPDATED) -->
+<section class="hero">
+    <h1>Wilderness Awaits<br>Luxury Safari Booking</h1>
+    <p>Real-time availability · Dynamic pricing · Seamless payments · AI concierge</p>
+    <div class="booking-widget">
+        <div class="field-group"><label>📅 Check-in</label><input type="date" id="checkin"></div>
+        <div class="field-group"><label>📅 Check-out</label><input type="date" id="checkout"></div>
+        <div class="field-group"><label>👥 Guests</label><select id="guests"><option>1 Adult</option><option>2 Adults</option><option>2 Adults + 1 Child</option><option>4 Adults</option></select></div>
+        <div class="field-group"><label>🎟️ Promo Code</label><input type="text" id="promoCode" placeholder="SAFARI20"></div>
+        <button class="btn-primary" onclick="checkAvailability()">Check Rates</button>
+    </div>
+</section>
+
+<main class="container">
+    <!-- Section 1: Rooms -->
+    <section id="rooms" class="section">
+        <div class="section-title"><i class="fas fa-bed"></i><span>Live Availability & Luxury Suites</span></div>
+        <div class="room-selector" id="roomSelector">
+            <div class="room-card" onclick="selectRoom('river')">
+                <i class="fas fa-water"></i><h3>River View Suite</h3>
+                <div class="room-price">$520 <span style="font-size:0.9rem;">/night</span></div>
+                <div class="availability">✅ 4 rooms left</div>
+                <small>Resident: $468</small>
+            </div>
+            <div class="room-card" onclick="selectRoom('savanna')">
+                <i class="fas fa-tree"></i><h3>Savanna Terrace</h3>
+                <div class="room-price">$790 <span style="font-size:0.9rem;">/night</span></div>
+                <div class="availability">✅ 2 rooms left</div>
+                <small>Resident: $711</small>
+            </div>
+            <div class="room-card" onclick="selectRoom('presidential')">
+                <i class="fas fa-crown"></i><h3>Presidential Safari</h3>
+                <div class="room-price">$1,450 <span style="font-size:0.9rem;">/night</span></div>
+                <div class="availability">⚠️ 1 suite left</div>
+                <small>Resident: $1,305</small>
+            </div>
+        </div>
+        <div id="availabilityMessage" style="margin-top:1rem; padding:0.8rem; background:#e8f5e9; border-radius:12px; display:none;"></div>
+    </section>
+
+    <!-- Section 2: Packages -->
+    <section id="packages" class="section">
+        <div class="section-title"><i class="fas fa-cube"></i><span>Packages & Experiences</span></div>
+        <div class="grid-3">
+            <div class="card"><i class="fas fa-binoculars"></i><h3>🦒 Migration Safari Package</h3><p>River crossing + full day game drives</p><div class="badge">+$290</div><button class="btn-outline" onclick="addPackage('Migration Safari',290)">Add</button></div>
+            <div class="card"><i class="fas fa-champagne-glasses"></i><h3>💕 Honeymoon Romance</h3><p>Bush breakfast, sundowner, spa</p><div class="badge">+$450</div><button class="btn-outline" onclick="addPackage('Honeymoon Romance',450)">Add</button></div>
+            <div class="card"><i class="fas fa-users"></i><h3>👨‍👩‍👧‍👦 Family Safari</h3><p>Child-friendly activities</p><div class="badge">+$380</div><button class="btn-outline" onclick="addPackage('Family Safari',380)">Add</button></div>
+        </div>
+    </section>
+
+    <!-- Section 3: Upselling -->
+    <section class="section">
+        <div class="section-title"><i class="fas fa-gem"></i><span>Upgrade Your Experience</span></div>
+        <div id="upsellList">
+            <div class="upsell-item"><span><strong>✨ Private Sundowner Deck</strong> - Sunset champagne</span><button class="btn-outline" onclick="addUpsell('Sundowner Deck',120)">+$120</button></div>
+            <div class="upsell-item"><span><strong>🦁 Extra Night Game Drive</strong> - Nocturnal wildlife</span><button class="btn-outline" onclick="addUpsell('Night Game Drive',95)">+$95</button></div>
+            <div class="upsell-item"><span><strong>💆 Couples Spa Treatment</strong> - African massage</span><button class="btn-outline" onclick="addUpsell('Spa Treatment',150)">+$150</button></div>
+            <div class="upsell-item"><span><strong>🍽️ Private Bush Dinner</strong> - 5-course gourmet</span><button class="btn-outline" onclick="addUpsell('Bush Dinner',220)">+$220</button></div>
+        </div>
+    </section>
+
+    <!-- Cart -->
+    <div class="cart-preview" id="cartPreview">
+        <span>🛒 <strong>Your Booking</strong></span>
+        <span id="cartSummary">No room selected</span>
+        <button class="btn-primary" onclick="openBookingModal()">Checkout</button>
+    </div>
+
+    <!-- B2B Agent Portal -->
+    <section id="agent" class="section">
+        <div class="section-title"><i class="fas fa-handshake"></i><span>B2B Travel Agent Portal</span></div>
+        <div class="agent-portal">
+            <i class="fas fa-key" style="font-size:2rem;"></i>
+            <h3>Agent Login • Commission Tracking</h3>
+            <p>Contracted rates • Voucher uploads • Allocation management</p>
+            <div style="margin:1rem 0;"><input type="text" id="agentCode" placeholder="Agent Code: AGENT2024"><button class="btn-primary" onclick="loginAgent()" style="margin-left:0.5rem;">Access Trade Rates</button></div>
+            <div id="agentMessage"></div>
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="section">
+        <div class="section-title"><i class="fas fa-chart-line"></i><span>Revenue & Occupancy Dashboard</span></div>
+        <div class="grid-3">
+            <div class="card"><i class="fas fa-percent"></i><h3>Occupancy</h3><div style="font-size:2rem; font-weight:700; color:var(--yellow-green-dark);" id="occupancy">78%</div></div>
+            <div class="card"><i class="fas fa-dollar-sign"></i><h3>ADR / RevPAR</h3><div><strong>$642</strong> ADR</div><div><strong>$501</strong> RevPAR</div></div>
+            <div class="card"><i class="fas fa-chart-simple"></i><h3>Conversion</h3><div style="font-size:2rem; font-weight:700; color:var(--yellow-green-dark);">3.2%</div><small>Direct:45% OTA:55%</small></div>
+        </div>
+        <button class="btn-secondary" onclick="refreshDashboard()">⟳ Refresh Metrics</button>
+        <div class="grid-3" style="margin-top:1rem;">
+            <div class="card"><i class="fas fa-globe"></i><h3>Marketing Attribution</h3><p>🇺🇸 USA: 42%<br>🇩🇪 Germany: 18%<br>🇬🇧 UK: 22%<br>🇰🇪 Kenya: 12%</p></div>
+            <div class="card"><i class="fas fa-chart-line"></i><h3>Booking Sources</h3><p>Direct: 35%<br>OTA: 45%<br>Agents: 20%</p></div>
+            <div class="card"><i class="fas fa-calendar"></i><h3>Peak Windows</h3><p>June-September (Migration)<br>December-January (Holidays)</p></div>
+        </div>
+    </section>
+
+    <!-- AI Concierge -->
+    <section class="section">
+        <div class="section-title"><i class="fas fa-robot"></i><span>AI Concierge & Guest Intelligence</span></div>
+        <div class="grid-3">
+            <div class="card"><i class="fas fa-comment-dots"></i><h3>WhatsApp AI Assistant</h3><input type="text" id="aiQuestion" placeholder="Ask about migration, bookings..." style="width:100%; padding:0.7rem; margin:0.5rem 0; border:1px solid #ddd; border-radius:10px;"><button class="btn-primary" onclick="askAI()" style="width:100%;">Ask AI</button><div id="aiResponse" style="margin-top:1rem;"></div></div>
+            <div class="card"><i class="fas fa-user-check"></i><h3>Guest Profiles</h3><p>✅ Dietary preferences<br>✅ Anniversary tracking<br>✅ Past stays<br>✅ Safari interests</p></div>
+            <div cl
